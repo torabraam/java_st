@@ -29,7 +29,7 @@ public class TestBase {
         wd.findElement(By.xpath("//input[@value='Login']")).click();
     }
 
-    protected void logoutFromGrp() {
+    protected void logout() {
         wd.findElement(By.linkText("Logout")).click();
     }
 
@@ -62,7 +62,7 @@ public class TestBase {
     }
 
     @AfterMethod(alwaysRun = true)
-    public void tearDown() throws Exception {
+    public void tearDown() {
         wd.quit();
     }
 
@@ -90,5 +90,38 @@ public class TestBase {
 
     protected void selectGroup() {
         wd.findElement(By.name("selected[]")).click();
+    }
+
+    protected void returnToHomePage() {
+        wd.findElement(By.linkText("home")).click();
+    }
+
+    protected void submitContactCreation() {
+        wd.findElement(By.name("submit")).click();
+    }
+
+    protected void fillContactForm(ContactData contactData) {
+        wd.findElement(By.name("firstname")).click();
+        wd.findElement(By.name("firstname")).clear();
+        wd.findElement(By.name("firstname")).sendKeys(contactData.getFirstname());
+        wd.findElement(By.name("middlename")).click();
+        wd.findElement(By.name("middlename")).clear();
+        wd.findElement(By.name("middlename")).sendKeys(contactData.getMiddlename());
+        wd.findElement(By.name("lastname")).click();
+        wd.findElement(By.name("lastname")).clear();
+        wd.findElement(By.name("lastname")).sendKeys(contactData.getLastname());
+        wd.findElement(By.name("address")).click();
+        wd.findElement(By.name("address")).clear();
+        wd.findElement(By.name("address")).sendKeys(contactData.getAddress());
+        wd.findElement(By.name("home")).click();
+        wd.findElement(By.name("home")).clear();
+        wd.findElement(By.name("home")).sendKeys(contactData.getHomeph());
+        wd.findElement(By.name("email")).click();
+        wd.findElement(By.name("email")).clear();
+        wd.findElement(By.name("email")).sendKeys(contactData.getEmail());
+    }
+
+    protected void gotoAddNewContact() {
+        wd.findElement(By.linkText("add new")).click();
     }
 }
