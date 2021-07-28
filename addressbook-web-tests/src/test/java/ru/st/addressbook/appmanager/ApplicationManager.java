@@ -5,6 +5,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.BrowserType;
 
+import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
 public class ApplicationManager {
@@ -28,7 +29,8 @@ public class ApplicationManager {
             wd = new ChromeDriver();
         }
 
-        wd.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+        //wd.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+        wd.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
         wd.get("https://localhost/addressbook/");
         groupHelper = new GroupHelper(wd);
         navigationHelper = new NavigationHelper(wd);

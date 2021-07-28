@@ -7,7 +7,7 @@ import ru.st.addressbook.appmanager.ApplicationManager;
 
 public class TestBase {
 
-    protected final ApplicationManager app = new ApplicationManager(BrowserType.CHROME); //передаем тип браузера в конструктор
+    protected final ApplicationManager app = new ApplicationManager(BrowserType.FIREFOX); //передаем тип браузера в конструктор
 
     @BeforeMethod(alwaysRun = true)
     public void setUp() throws Exception {
