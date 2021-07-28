@@ -8,7 +8,7 @@ public class ContactModificationTests extends TestBase{
     @Test
     public void testContactModification() {
         app.getContactHelper().initContactModification();
-        app.getContactHelper().fillContactForm(new ContactData("name01", "middle01", "last01", "address01", "0123456789", "0mail@mail.qa"));
+        app.getContactHelper().fillContactForm(new ContactData("name01", "middle01", "last01", "address01", "0123456789", "0mail@mail.qa", null), false);
         app.getContactHelper().submitContactModification();
     }
 }

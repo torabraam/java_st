@@ -29,8 +29,8 @@ public class ApplicationManager {
             wd = new ChromeDriver();
         }
 
-        //wd.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-        wd.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
+        //wd.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS); //old style
+        wd.manage().timeouts().implicitlyWait(Duration.ofSeconds(1));
         wd.get("https://localhost/addressbook/");
         groupHelper = new GroupHelper(wd);
         navigationHelper = new NavigationHelper(wd);
