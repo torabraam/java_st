@@ -6,11 +6,16 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.st.addressbook.model.ContactData;
+import ru.st.addressbook.model.GroupData;
+
 
 public class ContactHelper extends HelperBase {
 
-    public ContactHelper(WebDriver wd) {
-        super(wd);
+    ApplicationManager manager;
+
+    public ContactHelper(ApplicationManager manager) {
+        super(manager.wd);
+        this.manager = manager; // link to appMan
     }
 
 
@@ -49,5 +54,16 @@ public class ContactHelper extends HelperBase {
         click(By.xpath("//input[@value='Delete']"));
         wd.switchTo().alert().accept();
         wd.findElement(By.cssSelector("div.msgbox"));
+    }
+
+    public void createContact(ContactData contact, boolean creation) {
+        manager.getNavigationHelper().gotoAddNewContact();
+        fillContactForm(contact, creation);
+        submitContactCreation();
+        manager.getNavigationHelper().returnToHomePage();
+    }
+
+    public boolean isThereAContact() {
+        return isElementPresent(By.name("selected[]"));
     }
 }
