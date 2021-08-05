@@ -3,6 +3,7 @@ package ru.st.addressbook.tests;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.st.addressbook.model.GroupData;
+
 import java.util.List;
 
 public class GroupDeletionTests extends TestBase {
