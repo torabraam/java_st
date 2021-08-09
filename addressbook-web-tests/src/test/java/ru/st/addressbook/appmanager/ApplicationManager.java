@@ -31,7 +31,7 @@ public class ApplicationManager {
 
         //wd.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS); //old style
         wd.manage().timeouts().implicitlyWait(Duration.ofSeconds(1));
-        wd.get("https://localhost/addressbook/");
+        wd.get("http://localhost/addressbook/");
         groupHelper = new GroupHelper(wd);
         navigationHelper = new NavigationHelper(wd);
         contactHelper = new ContactHelper(this);
@@ -51,7 +51,7 @@ public class ApplicationManager {
         return navigationHelper;
     } //getNavigationHelper -> goTo
 
-    public ContactHelper getContactHelper() {
+    public ContactHelper contact() {
         return contactHelper;
     }
 }
