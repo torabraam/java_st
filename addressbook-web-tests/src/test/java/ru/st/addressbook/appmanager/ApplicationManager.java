@@ -43,13 +43,13 @@ public class ApplicationManager {
         wd.quit();
     }
 
-    public GroupHelper getGroupHelper() {
+    public GroupHelper group() { //getGroupHelper ->group
         return groupHelper;
     }
 
-    public NavigationHelper getNavigationHelper() {
+    public NavigationHelper goTo() {
         return navigationHelper;
-    }
+    } //getNavigationHelper -> goTo
 
     public ContactHelper getContactHelper() {
         return contactHelper;

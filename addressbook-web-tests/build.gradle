@@ -8,5 +8,6 @@ repositories {
 dependencies {
     implementation 'org.testng:testng:7.4.0'
     implementation 'org.seleniumhq.selenium:selenium-java:4.0.0-beta-4'
-    implementation "org.slf4j:slf4j-simple:1.6.1" //to solve SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
+    implementation "org.slf4j:slf4j-simple:1.6.1" //to solve SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder"
+    implementation 'org.hamcrest:hamcrest:2.2'
 }

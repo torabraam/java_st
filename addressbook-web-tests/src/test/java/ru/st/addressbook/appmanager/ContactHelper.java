@@ -1,13 +1,10 @@
 package ru.st.addressbook.appmanager;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.st.addressbook.model.ContactData;
-import ru.st.addressbook.model.GroupData;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,10 +58,10 @@ public class ContactHelper extends HelperBase {
     }
 
     public void createContact(ContactData contact, boolean creation) {
-        manager.getNavigationHelper().gotoAddNewContact();
+        manager.goTo().gotoAddNewContact();
         fillContactForm(contact, creation);
         submitContactCreation();
-        manager.getNavigationHelper().returnToHomePage();
+        manager.goTo().returnToHomePage();
     }
 
     public boolean isThereAContact() {
