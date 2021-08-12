@@ -18,7 +18,7 @@ public class ContactInfoTests extends TestBase {
             app.contact().createC(new ContactData().
                     withFirstname("name1").withMiddlename("middle1").withLastname("last1").
                     withAddress("address1").withHomePhone("123-123").withMobilePhone("6(7)").withWorkPhone("").
-                    withEmail("mail@mail.qa").withEmail2("").withEmail3("mail@@mail.qa").
+                    withEmail("mail@mail.qa").withEmail2("").withEmail3("mail@)@mail.qa").
                     withGroup("test1"), true);
         }
     }
@@ -58,13 +58,17 @@ public class ContactInfoTests extends TestBase {
     private String mergeEmails(ContactData contact) {
         return Arrays.asList(contact.getEmail(), contact.getEmail2(), contact.getEmail3())
                 .stream().filter((s) -> !s.equals(""))
-                .map(ContactInfoTests::cleaned)
+                .map(ContactInfoTests::cleanedE)
                 .collect(Collectors.joining("\n"));
     }
 
 
-    public static String cleaned(String field) {
-        return field.replaceAll("\\s", "").replaceAll("[-()]", "");
+    public static String cleaned(String ph) {
+        return ph.replaceAll("\\s", "").replaceAll("[-()]", "");
+    }
+
+    public static String cleanedE(String e) {
+        return e.replaceAll("\\s", "");
     }
 
     public static String cleanedA (String a) {
