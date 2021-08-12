@@ -11,3 +11,6 @@ dependencies {
     implementation "org.slf4j:slf4j-simple:1.6.1" //to solve SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder"
     implementation 'org.hamcrest:hamcrest:2.2'
 }
+test {
+    useTestNG()
+}

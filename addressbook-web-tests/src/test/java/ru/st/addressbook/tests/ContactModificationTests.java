@@ -36,12 +36,11 @@ public class ContactModificationTests extends TestBase {
                 withFirstname("name01").withMiddlename("middle01").withLastname("last01").
                 withAddress("address01").withHomeph("0123456789").withEmail("0mail@mail.qa").withGroup(null);
         app.contact().modifyC(user);
-        app.goTo().returnToHomePage();
+        //app.goTo().returnToHomePage();
+        assertThat(app.contact().count(), equalTo(before.size()));
         Contacts after = app.contact().allc();
-        assertEquals(after.size(), before.size());
         assertThat(after, equalTo(before.without(modifiedUser).withAdded(user)));
     }
 
 
 }
-

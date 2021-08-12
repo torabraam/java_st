@@ -10,7 +10,7 @@ public class ContactData {
     private String address;
     private String homeph;
     private String email;
-    private static String group;
+    private String group;
 
     public int getId() {
         return id;
@@ -40,7 +40,7 @@ public class ContactData {
         return email;
     }
 
-    public static String getGroup() {
+    public String getGroup() {
         return group;
     }
 
@@ -80,7 +80,7 @@ public class ContactData {
     }
 
     public ContactData withGroup(String group) {
-        ContactData.group = group;
+        this.group = group;
         return this;
     }
 
@@ -98,11 +98,11 @@ public class ContactData {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ContactData that = (ContactData) o;
-        return Objects.equals(firstname, that.firstname) && Objects.equals(lastname, that.lastname);
+        return id == that.id && Objects.equals(firstname, that.firstname) && Objects.equals(lastname, that.lastname);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(firstname, lastname);
+        return Objects.hash(id, firstname, lastname);
     }
 }

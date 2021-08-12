@@ -7,10 +7,7 @@ import org.testng.Assert;
 import ru.st.addressbook.model.ContactData;
 import ru.st.addressbook.model.Contacts;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 
 public class ContactHelper extends HelperBase {
@@ -31,7 +28,7 @@ public class ContactHelper extends HelperBase {
         type(By.name("email"), contactData.getEmail());
 
         if (creation) {
-            new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(ContactData.getGroup());
+            new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
         } else {
             Assert.assertFalse(isElementPresent(By.name("new_group")));
         }
@@ -53,6 +50,10 @@ public class ContactHelper extends HelperBase {
         wd.findElement(By.cssSelector("input[value='" + id + "']")).click();
     }
 
+    public void returnToHomePage() {
+        click(By.cssSelector("a[href=\"./\"]"));
+    }
+
     public void deleteSelectedContacts() {
         click(By.xpath("//input[@value='Delete']"));
         wd.switchTo().alert().accept();
@@ -63,18 +64,23 @@ public class ContactHelper extends HelperBase {
         manager.goTo().gotoAddNewContact();
         fillContactForm(contact, creation);
         submitContactCreation();
-        manager.goTo().returnToHomePage();
+        contactCache = null;
+        returnToHomePage();
+        //manager.goTo().returnToHomePage();
     }
 
     public void modifyC(ContactData user) {
         initContactModificationById(user.getId());
         fillContactForm(user, false);
         submitContactModification();
+        contactCache = null;
+        returnToHomePage();
     }
 
     public void deleteC(ContactData contact) {
         selectContactById(contact.getId());
         deleteSelectedContacts();
+        contactCache = null;
 
     }
 
@@ -82,20 +88,25 @@ public class ContactHelper extends HelperBase {
         return isElementPresent(By.name("selected[]"));
     }
 
-    public int getContactCount() {
+    public int count() {
         return wd.findElements(By.name("selected[]")).size();
     }
 
+    private Contacts contactCache = null;
+
     public Contacts allc() {
-        Contacts contacts = new Contacts();
+        if (contactCache != null){
+            return new Contacts(contactCache); // copy of contactCache
+        }
+        Contacts contactCache = new Contacts();
         List<WebElement> elements = wd.findElements(By.name("entry"));
         for (WebElement element : elements) {
             String lastname = element.findElement(By.cssSelector("td:nth-child(2)")).getText();
             String firstname = element.findElement(By.cssSelector("td:nth-child(3)")).getText();
             int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-            contacts.add(new ContactData().withId(id).withFirstname(firstname).withLastname(lastname));
+            contactCache.add(new ContactData().withId(id).withFirstname(firstname).withLastname(lastname));
         }
-        return contacts;
+        return new Contacts(contactCache);
 
     }
 
