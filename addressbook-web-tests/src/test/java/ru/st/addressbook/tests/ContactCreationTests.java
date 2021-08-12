@@ -31,7 +31,7 @@ public class ContactCreationTests extends TestBase {
         Contacts before = app.contact().allc();
         app.goTo().gotoAddNewContact();
         ContactData user = new ContactData().
-                withFirstname("name1'").withMiddlename("middle1").withLastname("last1").
+                withFirstname("name1'").withMiddlename("middle1'").withLastname("last1").
                 withAddress("address1").withHomeph("123456789").withEmail("mail@mail.qa").
                 withGroup("test1");
         app.contact().createC(user, true);
