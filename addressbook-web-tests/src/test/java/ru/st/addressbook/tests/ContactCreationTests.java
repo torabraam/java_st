@@ -4,20 +4,23 @@ import org.testng.annotations.Test;
 import ru.st.addressbook.model.ContactData;
 import ru.st.addressbook.model.Contacts;
 
+import java.io.File;
+
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ContactCreationTests extends TestBase {
 
-    @Test
+    @Test (enabled = true)
     public void testContactCreationTests() {
 
+        File photo = new File("src/test/resources/pic1.png");
         Contacts before = app.contact().allc();
         app.goTo().gotoAddNewContact();
         ContactData user = new ContactData().
                 withFirstname("name1").withMiddlename("middle1").withLastname("last1").
                 withAddress("address1").withHomePhone("123456789").withEmail("mail@mail.qa").
-                withGroup("test1");
+                withGroup("test1").withPhoto(photo);
         app.contact().createC(user, true);
         assertThat(app.contact().count(), equalTo(before.size() + 1));
         Contacts after = app.contact().allc();
@@ -25,7 +28,7 @@ public class ContactCreationTests extends TestBase {
                 before.withAdded(user.withId(after.stream().mapToInt((u) -> u.getId()).max().getAsInt()))));
     }
 
-    @Test
+    @Test (enabled = false)
     public void testBadContactCreationTests() {
 
         Contacts before = app.contact().allc();
