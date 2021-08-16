@@ -7,6 +7,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.thoughtworks.xstream.XStream;
 import ru.st.addressbook.model.GroupData;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -24,7 +25,6 @@ public class GroupDataGenerator {
     public String format;
 
 
-
     public static void main(String[] args) throws IOException {
         GroupDataGenerator generator = new GroupDataGenerator();
         JCommander jCommander = new JCommander(generator);
@@ -39,11 +39,11 @@ public class GroupDataGenerator {
 
     private void run() throws IOException {
         List<GroupData> groups = generateGroups(count);
-        if (format.equals("csv")){
+        if (format.equals("csv")) {
             saveAsCSV(groups, new File(file));
-        } else if (format.equals("xml")){
+        } else if (format.equals("xml")) {
             saveAsXML(groups, new File(file));
-        } else if (format.equals("json")){
+        } else if (format.equals("json")) {
             saveAsJSON(groups, new File(file));
         } else {
             System.out.println("Unrecognized format " + format);
@@ -71,17 +71,17 @@ public class GroupDataGenerator {
     private void saveAsJSON(List<GroupData> groups, File file) throws IOException {
         Gson gson = new GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation().create();
         String json = gson.toJson(groups);
-        Writer writer = new FileWriter(file);
-        writer.write(json);
-        writer.close();
+        try (Writer writer = new FileWriter(file);) {
+            writer.write(json);
+        }
     }
 
     private void saveAsXML(List<GroupData> groups, File file) throws IOException {
         XStream xstream = new XStream();
         xstream.processAnnotations(GroupData.class);
         String xml = xstream.toXML(groups);
-        Writer writer = new FileWriter(file);
-        writer.write(xml);
-        writer.close();
+        try (Writer writer = new FileWriter(file)) {
+            writer.write(xml);
+        }
     }
 }
