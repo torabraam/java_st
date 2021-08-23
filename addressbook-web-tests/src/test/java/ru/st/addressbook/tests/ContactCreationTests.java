@@ -59,7 +59,7 @@ public class ContactCreationTests extends TestBase {
     @Test(enabled = false)
     public void testBadContactCreationTests() {
 
-        // Contacts before = app.contact().allc(); // use ui
+        // Contacts before = app.contact().allc(); //use ui
         Contacts before = app.db().contacts(); //use db
         app.goTo().gotoAddNewContact();
         ContactData user = new ContactData().
