@@ -40,7 +40,8 @@ public class ContactCreationTests extends TestBase {
     public void testContactCreationTests(ContactData contact) { //before was void testContactCreationTests()
 
         File photo = new File("src/test/resources/pic1.png");
-        Contacts before = app.contact().allc();
+        // Contacts before = app.contact().allc(); //use ui
+        Contacts before = app.db().contacts(); //use db
         app.goTo().gotoAddNewContact();
         //before dataProvider
 /*        ContactData contact = new ContactData().
@@ -49,7 +50,8 @@ public class ContactCreationTests extends TestBase {
                 withGroup("test1").withPhoto(photo);*/
         app.contact().createC(contact, true);
         assertThat(app.contact().count(), equalTo(before.size() + 1));
-        Contacts after = app.contact().allc();
+        // Contacts after = app.contact().allc(); //use ui
+        Contacts after = app.db().contacts(); //use db
         assertThat(after, equalTo(
                 before.withAdded(contact.withId(after.stream().mapToInt((u) -> u.getId()).max().getAsInt()))));
     }
@@ -57,7 +59,8 @@ public class ContactCreationTests extends TestBase {
     @Test(enabled = false)
     public void testBadContactCreationTests() {
 
-        Contacts before = app.contact().allc();
+        // Contacts before = app.contact().allc(); //use ui
+        Contacts before = app.db().contacts(); //use db
         app.goTo().gotoAddNewContact();
         ContactData user = new ContactData().
                 withFirstname("name1'").withMiddlename("middle1'").withLastname("last1").
@@ -65,7 +68,8 @@ public class ContactCreationTests extends TestBase {
                 withGroup("test1");
         app.contact().createC(user, true);
         assertThat(app.contact().count(), equalTo(before.size()));
-        Contacts after = app.contact().allc();
+        // Contacts after = app.contact().allc(); //use ui
+        Contacts after = app.db().contacts(); //use db
         assertThat(after, equalTo(before));
     }
 
