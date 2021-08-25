@@ -51,8 +51,10 @@ public class ContactDataGenerator {
         for (int i = 0; i < count; i++) {
             contacts.add(new ContactData().withFirstname(String.format("Fname%s", i))
                     .withMiddlename(String.format("Mname%s", i)).withLastname(String.format("Lname%s", i))
-                    .withHomePhone(String.format("123%s", i)).withAddress(String.format("address %s", i))
-                    .withEmail(String.format("email%s",i)).withGroup("test1"));
+                    .withHomePhone(String.format("123%s", i)).withMobilePhone(String.format("1-2-3%s", i)).withWorkPhone(String.format("12-3%s", i))
+                    .withAddress(String.format("address %s", i))
+                    .withEmail(String.format("email%s",i)).withEmail2(String.format("email@mail%s",i)).withEmail3(String.format("email%s@ui.ui",i))
+                    .withGroup("test1"));
         }
         return contacts;
     }

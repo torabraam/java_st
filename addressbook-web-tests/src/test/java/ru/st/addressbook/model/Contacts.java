@@ -27,10 +27,10 @@ public class Contacts extends ForwardingSet<ContactData> {
         return delegate;
     }
 
-    public Contacts withAdded(ContactData user) {
+    public Contacts withAdded(ContactData contact) {
         //copy objects
         Contacts contacts = new Contacts(this);
-        contacts.add(user);
+        contacts.add(contact);
         return contacts;
     }
 

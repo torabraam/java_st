@@ -8,7 +8,8 @@ repositories {
 dependencies {
     implementation 'org.testng:testng:7.4.0'
     implementation 'org.seleniumhq.selenium:selenium-java:4.0.0-beta-4'
-    implementation "org.slf4j:slf4j-simple:1.6.1" //to solve SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder"
+    implementation "org.slf4j:slf4j-simple:1.6.1"
+    //to solve SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder"
     implementation 'org.hamcrest:hamcrest:2.2'
     implementation 'com.beust:jcommander:1.81'
     implementation 'com.thoughtworks.xstream:xstream:1.4.17'
@@ -18,7 +19,7 @@ dependencies {
     implementation 'org.hibernate:hibernate-core:5.5.6.Final'
 }
 
-task testGroups (type: Test) {
+task testGroups(type: Test) {
     useTestNG {
         suites 'src/test/resources/testng-groups.xml'
     }
@@ -28,9 +29,12 @@ task testGroups (type: Test) {
     if (project.hasProperty('target')) {
         systemProperty 'target', "${target}"
     }
+    if (project.hasProperty('verifyUI')) {
+        systemProperty 'verifyUI', "${verifyUI}"
+    }
 }
 
-task testContactss (type: Test) {
+task testContactss(type: Test) {
     useTestNG {
         suites 'src/test/resources/testng-contacts.xml'
     }
@@ -39,5 +43,8 @@ task testContactss (type: Test) {
     }
     if (project.hasProperty('target')) {
         systemProperty 'target', "${target}"
+    }
+    if (project.hasProperty('verifyUI')) {
+        systemProperty 'verifyUI', "${verifyUI}"
     }
 }

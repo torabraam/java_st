@@ -5,7 +5,11 @@
     "lastname": "Lname0",
     "address": "address 0",
     "homePhone": "1230",
+    "workPhone": "12-30",
+    "mobilePhone": "1-2-30",
     "email": "email0",
+    "email2": "email@mail0",
+    "email3": "email0@ui.ui",
     "group": "test1"
   },
   {
@@ -14,7 +18,11 @@
     "lastname": "Lname1",
     "address": "address 1",
     "homePhone": "1231",
+    "workPhone": "12-31",
+    "mobilePhone": "1-2-31",
     "email": "email1",
+    "email2": "email@mail1",
+    "email3": "email1@ui.ui",
     "group": "test1"
   },
   {
@@ -23,7 +31,11 @@
     "lastname": "Lname2",
     "address": "address 2",
     "homePhone": "1232",
+    "workPhone": "12-32",
+    "mobilePhone": "1-2-32",
     "email": "email2",
+    "email2": "email@mail2",
+    "email3": "email2@ui.ui",
     "group": "test1"
   }
 ]
