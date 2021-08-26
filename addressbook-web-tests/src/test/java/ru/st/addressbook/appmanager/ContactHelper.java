@@ -6,6 +6,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.st.addressbook.model.ContactData;
 import ru.st.addressbook.model.Contacts;
+import ru.st.addressbook.model.GroupData;
 
 import java.util.List;
 
@@ -34,7 +35,11 @@ public class ContactHelper extends HelperBase {
 
 
         if (creation) {
-            new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
+            //new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
+            if (contactData.getGroups().size() > 0) {
+                Assert.assertEquals(contactData.getGroups().size(), 1);
+                new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroups().iterator().next().getName());
+            }
         } else {
             Assert.assertFalse(isElementPresent(By.name("new_group")));
         }
@@ -142,5 +147,33 @@ public class ContactHelper extends HelperBase {
         return new ContactData().withId(contact.getId()).withFirstname(firstName).withLastname(lastName).
                 withMiddlename(middleName).withAddress(address).withEmail(email).withEmail2(email2).
                 withEmail3(email3).withHomePhone(homePhone).withMobilePhone(mobilePhone).withWorkPhone(workPhone);
+    }
+
+    public void selectToGroupByValue(String value) {
+        new Select(wd.findElement(By.name("to_group"))).selectByValue(value);
+    }
+
+    public void selectFilterGroupByValue(String value) {
+        new Select(wd.findElement(By.name("group"))).selectByValue(value);
+    }
+
+    public void addToGroup() {
+        click(By.name("add"));
+    }
+
+    public void removeFromGroup() {
+        click(By.name("remove"));
+    }
+
+    public void addContactToGroup(ContactData contact, GroupData group) {
+        selectContactById(contact.getId());
+        selectToGroupByValue(String.valueOf(group.getId()));
+        addToGroup();
+    }
+
+    public void removeContactFromGroup(ContactData contact, GroupData group) {
+        selectFilterGroupByValue(String.valueOf(group.getId()));
+        selectContactById(contact.getId());
+        removeFromGroup();
     }
 }

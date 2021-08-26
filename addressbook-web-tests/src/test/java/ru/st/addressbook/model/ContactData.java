@@ -5,59 +5,66 @@ import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.io.File;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
+
 @Entity //привязка к бд
 @Table(name = "addressbook")
 public class ContactData {
 
     @Id
-    @Column(name="id")
+    @Column(name = "id")
     private int id = Integer.MAX_VALUE;
 
     @Expose
-    @Column(name="firstname")
+    @Column(name = "firstname")
     private String firstname;
 
     @Expose
-    @Column(name="middlename")
+    @Column(name = "middlename")
     private String middlename;
 
     @Expose
-    @Column(name="lastname")
+    @Column(name = "lastname")
     private String lastname;
 
     @Expose
-    @Column(name="address")
-    @Type(type="text")
+    @Column(name = "address")
+    @Type(type = "text")
     private String address;
 
     @Expose
-    @Column(name="home")
-    @Type(type="text")
+    @Column(name = "home")
+    @Type(type = "text")
     private String homePhone;
 
-    @Column(name="work")
-    @Type(type="text")
+    @Expose
+    @Column(name = "work")
+    @Type(type = "text")
     private String workPhone;
 
-    @Column(name="mobile")
-    @Type(type="text")
+    @Expose
+    @Column(name = "mobile")
+    @Type(type = "text")
     private String mobilePhone;
 
     @Transient //хибернейт пропустит
     private String allPhones;
 
     @Expose
-    @Column(name="email")
-    @Type(type="text")
+    @Column(name = "email")
+    @Type(type = "text")
     private String email;
 
-    @Column(name="email2")
-    @Type(type="text")
+    @Expose
+    @Column(name = "email2")
+    @Type(type = "text")
     private String email2;
 
-    @Column(name="email3")
-    @Type(type="text")
+    @Expose
+    @Column(name = "email3")
+    @Type(type = "text")
     private String email3;
 
     @Transient
@@ -67,8 +74,8 @@ public class ContactData {
     @Transient
     private String group;
 
-    @Column(name="photo")
-    @Type(type="text")
+    @Column(name = "photo")
+    @Type(type = "text")
     private String photo;
 
     public int getId() {
@@ -210,17 +217,25 @@ public class ContactData {
         return this;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        ContactData that = (ContactData) o;
-        return id == that.id && Objects.equals(firstname, that.firstname) && Objects.equals(middlename, that.middlename) && Objects.equals(lastname, that.lastname) && Objects.equals(address, that.address) && Objects.equals(homePhone, that.homePhone) && Objects.equals(email, that.email);
+    @Expose
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "address_in_groups",  //таблица связи
+            joinColumns = @JoinColumn(name = "id"), //текущий объект(контакт)
+            inverseJoinColumns = @JoinColumn(name = "group_id")) //связанный объект(группа)
+    private Set<GroupData> groups = new HashSet<GroupData>();
+
+    public Groups getGroups() {
+        return new Groups(groups);
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, firstname, middlename, lastname, address, homePhone, email);
+    public ContactData withDefaultGroups() {
+        this.groups = new HashSet<>();
+        return this;
+    }
+
+    public ContactData inGroups(GroupData group) {
+        this.groups.add(group);
+        return this;
     }
 
     @Override
@@ -228,8 +243,28 @@ public class ContactData {
         return "ContactData{" +
                 "id=" + id +
                 ", firstname='" + firstname + '\'' +
+                ", middlename='" + middlename + '\'' +
                 ", lastname='" + lastname + '\'' +
+                ", address='" + address + '\'' +
+                ", homePhone='" + homePhone + '\'' +
+                ", workPhone='" + workPhone + '\'' +
+                ", mobilePhone='" + mobilePhone + '\'' +
+                ", email='" + email + '\'' +
+                ", email2='" + email2 + '\'' +
+                ", email3='" + email3 + '\'' +
                 '}';
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ContactData that = (ContactData) o;
+        return id == that.id && Objects.equals(firstname, that.firstname) && Objects.equals(lastname, that.lastname) && Objects.equals(address, that.address) && Objects.equals(homePhone, that.homePhone) && Objects.equals(email, that.email);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, firstname, lastname, address, homePhone, email);
+    }
 }

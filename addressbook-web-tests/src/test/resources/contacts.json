@@ -9,8 +9,7 @@
     "mobilePhone": "1-2-30",
     "email": "email0",
     "email2": "email@mail0",
-    "email3": "email0@ui.ui",
-    "group": "test1"
+    "email3": "email0@ui.ui"
   },
   {
     "firstname": "Fname1",
@@ -22,8 +21,7 @@
     "mobilePhone": "1-2-31",
     "email": "email1",
     "email2": "email@mail1",
-    "email3": "email1@ui.ui",
-    "group": "test1"
+    "email3": "email1@ui.ui"
   },
   {
     "firstname": "Fname2",
@@ -35,7 +33,6 @@
     "mobilePhone": "1-2-32",
     "email": "email2",
     "email2": "email@mail2",
-    "email3": "email2@ui.ui",
-    "group": "test1"
+    "email3": "email2@ui.ui"
   }
 ]
