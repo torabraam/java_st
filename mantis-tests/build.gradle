@@ -11,14 +11,17 @@ dependencies {
     implementation "org.slf4j:slf4j-simple:1.6.1"
     //to solve SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder"
     implementation 'org.hamcrest:hamcrest:2.2'
-
+    implementation 'commons-logging:commons-logging:1.2'
+    implementation 'org.apache.httpcomponents:httpcomponents-client:4.5.13'
+    implementation 'org.wso2.apache.httpcomponents:httpclient:4.3.1.wso2v1'
+    implementation 'commons-net:commons-net:3.8.0'
+    implementation 'org.subethamail:subethasmtp:3.1.7'
+    implementation 'ru.lanwen.verbalregex:java-verbal-expressions:1.8'
 }
 
 test {
-    useTestNG {
-        suites 'src/test/resources/testng.xml'
-    }
-    if (project.hasProperty('browser')) {
+    useTestNG {}
+   /* if (project.hasProperty('browser')) {
         systemProperty 'browser', "${browser}"
     }
     if (project.hasProperty('target')) {
@@ -26,5 +29,5 @@ test {
     }
     if (project.hasProperty('verifyUI')) {
         systemProperty 'verifyUI', "${verifyUI}"
-    }
+    } */
 }
