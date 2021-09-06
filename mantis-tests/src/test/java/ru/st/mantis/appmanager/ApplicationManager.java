@@ -22,6 +22,7 @@ public class ApplicationManager {
     private JamesHelper jamesHelper;
     private ChangePasswordHelper cpHelper;
     private LoginHelper loginHelper;
+    private SoapHelper soapHelper;
 
     public ApplicationManager(String browser) {  //конструктор для BrowserType из TestBase
         this.browser = browser;
@@ -101,4 +102,12 @@ public class ApplicationManager {
         }
         return loginHelper;
     }
+
+    public SoapHelper soap() {
+        if (soapHelper == null) {
+            soapHelper = new SoapHelper(this);
+        }
+        return soapHelper;
+    }
+
 }
