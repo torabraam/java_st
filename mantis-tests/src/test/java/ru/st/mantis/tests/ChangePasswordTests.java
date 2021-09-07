@@ -19,7 +19,7 @@ public class ChangePasswordTests extends TestBase {
 
     @Test
     public void testChangePassword() throws IOException, ServiceException {
-        //skipIfNotFixed(1); check issue status
+       // skipIfNotFixed(2); //check issue status
         app.login().login("administrator", "root");
         app.cp().goToSettings();
         app.cp().selectUserManagementTab();
