@@ -5,6 +5,8 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.lanwen.verbalregex.VerbalExpression;
 import ru.st.mantis.model.MailMessage;
+
+import javax.xml.rpc.ServiceException;
 import java.io.IOException;
 import java.util.List;
 import static org.testng.Assert.assertTrue;
@@ -16,7 +18,8 @@ public class ChangePasswordTests extends TestBase {
     }
 
     @Test
-    public void testChangePassword() throws IOException {
+    public void testChangePassword() throws IOException, ServiceException {
+        //skipIfNotFixed(1); check issue status
         app.login().login("administrator", "root");
         app.cp().goToSettings();
         app.cp().selectUserManagementTab();

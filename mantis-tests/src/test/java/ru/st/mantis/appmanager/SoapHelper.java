@@ -13,6 +13,8 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import static java.math.BigInteger.valueOf;
+
 public class SoapHelper {
 
     private final ApplicationManager app;
@@ -37,12 +39,12 @@ public class SoapHelper {
 
     public Issue addIssue(Issue issue) throws MalformedURLException, ServiceException, RemoteException {
         MantisConnectPortType mc = getMantisConnect();
-        String[] categories = mc.mc_project_get_categories(app.getProperty("soap.Login"), app.getProperty("soap.Password"),BigInteger.valueOf(issue.getProject().getId()));
+        String[] categories = mc.mc_project_get_categories(app.getProperty("soap.Login"), app.getProperty("soap.Password"), valueOf(issue.getProject().getId()));
         IssueData issueData = new IssueData();
         issueData.setSummary(issue.getSummary());
         issueData.setDescription(issue.getDescription());
         issueData.setCategory(categories[0]);
-        issueData.setProject(new ObjectRef(BigInteger.valueOf(issue.getProject().getId()), issue.getProject().getName()));
+        issueData.setProject(new ObjectRef(valueOf(issue.getProject().getId()), issue.getProject().getName()));
         BigInteger issueId = mc.mc_issue_add(app.getProperty("soap.Login"), app.getProperty("soap.Password"), issueData);
         IssueData createdIssueData =  mc.mc_issue_get(app.getProperty("soap.Login"), app.getProperty("soap.Password"), issueId);;
         return new Issue().withId(createdIssueData.getId().intValue())
@@ -50,5 +52,11 @@ public class SoapHelper {
                 .withDescription(createdIssueData.getDescription())
                 .withProject(new Project().withId(createdIssueData.getProject().getId().intValue())
                 .withName(createdIssueData.getProject().getName()));
+    }
+
+    public String getIssueStatus(int issueId) throws MalformedURLException, ServiceException, RemoteException {
+        MantisConnectPortType mc = getMantisConnect();
+        IssueData issueData = mc.mc_issue_get(app.getProperty("soap.Login"), app.getProperty("soap.Password"), valueOf(issueId));
+        return issueData.getStatus().getName();
     }
 }
