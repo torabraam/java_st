@@ -8,7 +8,7 @@ public class ChangePasswordHelper extends HelperBase {
     }
 
     public void goToSettings() {
-        click(By.xpath("//div[@id='sidebar']//li[6]"));
+        click(By.xpath("//div[@id='sidebar']//li[7]"));
     }
 
     public void selectUserManagementTab() {
