@@ -7,14 +7,14 @@ public class Issue {
     private int id;
     private String subject;
     private String description;
-    private String state;
+    private String state_name;
 
     public String getState() {
-        return state;
+        return state_name;
     }
 
     public Issue withState(String state) {
-        this.state = state;
+        this.state_name = state;
         return this;
     }
 
