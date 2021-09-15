@@ -20,7 +20,7 @@ public class PointTest {
         Assert.assertEquals(p1.distance2(p2), 6.0);
     }
 
-    @Test
+    @Test (enabled = false)
     // with Assert class negative
     public void distance2Test3() {
         Point p1 = new Point(15.0, 3.0);
