@@ -27,7 +27,7 @@ public class ApplicationManager {
     private String browser;
     private DbHelper dbHelper;
 
-    public ApplicationManager(String browser)  {  //конструктор для BrowserType из TestBase
+    public ApplicationManager(String browser) {  //конструктор для BrowserType из TestBase
         this.browser = browser;
         properties = new Properties();
 
@@ -48,7 +48,7 @@ public class ApplicationManager {
         } else {
             DesiredCapabilities capabilities = new DesiredCapabilities();
             capabilities.setBrowserName(browser);
-
+            //capabilities.setPlatform(Platform.fromString(System.getProperty("platform", "win10")));
             wd = new RemoteWebDriver(new URL(properties.getProperty("selenium.server")), capabilities);
         }
 
