@@ -38,7 +38,7 @@ public class ApplicationManager {
         properties.load(new FileReader(new File(String.format("src/test/resources/%s.properties", target))));
 
         dbHelper = new DbHelper();
-
+        //for jenkins
         if ("".equals(properties.getProperty("selenium.server"))) {
             if (browser.equals(BrowserType.FIREFOX)) {
                 wd = new FirefoxDriver();
@@ -48,7 +48,7 @@ public class ApplicationManager {
         } else {
             DesiredCapabilities capabilities = new DesiredCapabilities();
             capabilities.setBrowserName(browser);
-            //capabilities.setPlatform(Platform.fromString(System.getProperty("platform", "win10")));
+            // capabilities.setPlatform(Platform.fromString(System.getProperty("platform", "win10")));
             wd = new RemoteWebDriver(new URL(properties.getProperty("selenium.server")), capabilities);
         }
 

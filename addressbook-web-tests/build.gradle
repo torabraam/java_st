@@ -1,6 +1,5 @@
 apply plugin: 'java'
 
-
 repositories {
     mavenCentral()
 }
@@ -32,6 +31,7 @@ task testGroups(type: Test) {
     if (project.hasProperty('verifyUI')) {
         systemProperty 'verifyUI', "${verifyUI}"
     }
+
     if (project.hasProperty('platform')) {
         systemProperty 'platform', "${platform}"
     }
@@ -50,6 +50,7 @@ task testContactss(type: Test) {
     if (project.hasProperty('verifyUI')) {
         systemProperty 'verifyUI', "${verifyUI}"
     }
+
     if (project.hasProperty('platform')) {
         systemProperty 'platform', "${platform}"
     }
